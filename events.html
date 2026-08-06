@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — Nanae Itoi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">NANAE ITOI</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="bio.html">Bio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+</nav>
+
+<section class="events page-header">
+  <div class="section-label">Timeline</div>
+  <h2 class="section-title">Events &amp; Exhibitions</h2>
+
+  <!--
+    Add or edit events here. Each .event-item needs:
+    - data-start (YYYY-MM-DD, required)
+    - data-end (YYYY-MM-DD, optional — for events that run over a date range)
+    - a .event-date label (shown in the timeline)
+    - an <h4> title and a <p> description
+    The script below sorts these into Upcoming / Current / Past automatically,
+    based on today's date, every time the page loads.
+  -->
+  <div class="events-source" hidden>
+    <div class="event-item" data-start="2026-08-20">
+      <div class="event-date">August 2026</div>
+      <h4>BUCCAL CONE: Performing artwork</h4>
+      <p><a href="https://supromen.com/home/" target="_blank" rel="noopener">Supr Omen</a>, Brooklyn</p>
+    </div>
+    <div class="event-item" data-start="2024-09-01" data-end="2099-12-31">
+      <div class="event-date">Since Sep 2024 · Every other month</div>
+      <h4>Coiffeur + Art</h4>
+      <p>Curating at Coiffeur hair salon, Manhattan, NY</p>
+    </div>
+    <div class="event-item" data-start="2026-06-01">
+      <div class="event-date">June 2026</div>
+      <h4>Whale -Echoes-: performing artwork</h4>
+      <p><a href="https://supromen.com/home/" target="_blank" rel="noopener">Supr Omen</a>, Brooklyn</p>
+    </div>
+    <div class="event-item" data-start="2026-05-01">
+      <div class="event-date">May 2026</div>
+      <h4>Threshold: performing artwork</h4>
+      <p><a href="https://supromen.com/home/" target="_blank" rel="noopener">Supr Omen</a>, Brooklyn</p>
+    </div>
+    <div class="event-item" data-start="2026-04-01">
+      <div class="event-date">April 2026</div>
+      <h4>Selfpopper: performing artwork for Every Woman Biannial</h4>
+      <p>Pen and Brush gallery, Manhattan</p>
+    </div>
+    <div class="event-item" data-start="2025-09-15">
+      <div class="event-date">September 2025</div>
+      <h4>Noise.exe: Rebirth / SOLD OUT SHOW</h4>
+      <p>The Cell Theatre, Manhattan</p>
+    </div>
+    <div class="event-item" data-start="2025-09-01">
+      <div class="event-date">September 2025</div>
+      <h4>Collaboration with Numinous Realm / Brooklyn Art Cave</h4>
+      <p>Brooklyn Art Cave, Brooklyn</p>
+    </div>
+    <div class="event-item" data-start="2025-08-01">
+      <div class="event-date">August 2025</div>
+      <h4>VJ (Video Jockey) / Live Visual Artist for BAR RAVE</h4>
+      <p>Tokiodelic, Manhattan</p>
+    </div>
+    <div class="event-item" data-start="2025-05-01">
+      <div class="event-date">May 2025</div>
+      <h4>Digital Aquarium</h4>
+      <p>C5BK, Brooklyn</p>
+    </div>
+    <div class="event-item" data-start="2024-11-01">
+      <div class="event-date">November 2024</div>
+      <h4>Washi x AR: Paper Spirits</h4>
+      <p>Studio Soil, Tokyo</p>
+    </div>
+  </div>
+
+  <div class="events-group" id="group-future">
+    <h3 class="events-group-title">Upcoming</h3>
+    <div class="timeline"></div>
+  </div>
+  <div class="events-group" id="group-current">
+    <h3 class="events-group-title">Current</h3>
+    <div class="timeline"></div>
+  </div>
+  <div class="events-group" id="group-past">
+    <h3 class="events-group-title">Past</h3>
+    <div class="timeline"></div>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 Nanae Itoi</span>
+  <span>Design &amp; Development — Portfolio Site</span>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+(function(){
+  const today = new Date();
+  const items = Array.from(document.querySelectorAll('.events-source .event-item'));
+  const future = [], current = [], past = [];
+
+  items.forEach(el => {
+    const start = new Date(el.dataset.start);
+    const end = el.dataset.end ? new Date(el.dataset.end) : start;
+    if (today < start) future.push(el);
+    else if (today > end) past.push(el);
+    else current.push(el);
+  });
+
+  future.sort((a, b) => new Date(a.dataset.start) - new Date(b.dataset.start));
+  current.sort((a, b) => new Date(a.dataset.start) - new Date(b.dataset.start));
+  past.sort((a, b) => new Date(b.dataset.start) - new Date(a.dataset.start));
+
+  function render(groupId, list){
+    const group = document.querySelector(groupId);
+    const timeline = group.querySelector('.timeline');
+    if (list.length === 0) { group.style.display = 'none'; return; }
+    list.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'timeline-row';
+      const date = item.querySelector('.event-date').textContent;
+      const title = item.querySelector('h4').textContent;
+      const desc = item.querySelector('p').innerHTML;
+      row.innerHTML = `<div class="timeline-year">${date}</div><div class="timeline-desc"><h4>${title}</h4><p>${desc}</p></div>`;
+      timeline.appendChild(row);
+    });
+  }
+
+  render('#group-future', future);
+  render('#group-current', current);
+  render('#group-past', past);
+})();
+</script>
+</body>
+</html>

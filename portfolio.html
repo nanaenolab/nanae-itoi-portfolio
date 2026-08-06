@@ -1,0 +1,146 @@
+Void<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Nanae Itoi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">NANAE ITOI</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="bio.html">Bio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+</nav>
+
+<section class="work page-header">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title">Portfolio</h2>
+  <div class="work-grid">
+    <div class="work-item" data-gallery-trigger="kanami-gallery">
+      <img src="asset/2026/img/Kumamoto/KanamiBlue%202.jpg" alt="Interactive projection installation, blue world map motif">
+      <div class="work-overlay">
+        <div class="tag">Installation</div>
+        <h3>Kumamoto Museum — May 2026</h3>
+      </div>
+    </div>
+    <div class="work-item" data-gallery-trigger="whale-gallery">
+      <video src="asset/2026/video/compressed/buccalcone/WhaleJune2026/Whale1_June2026_web.mp4" muted loop playsinline preload="metadata"></video>
+      <div class="work-overlay">
+        <div class="tag">Video</div>
+        <h3>Whale — June 2026</h3>
+      </div>
+    </div>
+    <div class="work-item">
+      <video src="asset/2026/video/compressed/buccalcone/threshold_web.mp4" muted loop playsinline preload="metadata"></video>
+      <div class="work-overlay">
+        <div class="tag">Video</div>
+        <h3>Threshold - Febraury 2026</h3>
+      </div>
+    </div>
+    <div class="work-item">
+      <video src="asset/2025/video/compressed/2025void_web.mp4" muted loop playsinline preload="metadata"></video>
+      <div class="work-overlay">
+        <div class="tag">Video</div>
+        <h3>Coiffeur + Art </h3>
+      </div>
+    </div>
+    <div class="work-item">
+      <img src="asset/2025/img/compressed/BAC/BAC_1_web.jpg" alt="Live performance with body-mapped code and painted wing projection">
+      <div class="work-overlay">
+        <div class="tag">Performance</div>
+        <h3>BAC — September 2025</h3>
+      </div>
+    </div>
+    <div class="work-item">
+      <img src="asset/2025/img/compressed/thecell/KONEZUMI_web.jpg" alt="Live band performance with neon LED glasses and projected visuals">
+      <div class="work-overlay">
+        <div class="tag">Performance</div>
+        <h3>The cell theather - September 2025</h3>
+      </div>
+    </div>
+    <div class="work-item placeholder"><span>+ Add Work</span></div>
+  </div>
+</section>
+
+<div class="lightbox" id="kanami-gallery" hidden>
+  <button class="lightbox-close" aria-label="Close gallery">✕</button>
+  <div class="lightbox-inner">
+    <div class="section-label">Installation</div>
+    <h2 class="section-title">Untitled — Blue / Yellow</h2>
+    <div class="lightbox-grid">
+      <img src="asset/2026/img/Kumamoto/KanamiBlue%202.jpg" alt="Interactive projection installation, blue world map motif">
+      <img src="asset/2026/img/Kumamoto/KanamiYellow%20.jpg" alt="Interactive projection installation, neon bear motif">
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="whale-gallery" hidden>
+  <button class="lightbox-close" aria-label="Close gallery">✕</button>
+  <div class="lightbox-inner">
+    <div class="section-label">Video</div>
+    <h2 class="section-title">Whale — June 2026</h2>
+    <video class="lightbox-video" src="asset/2026/video/compressed/buccalcone/WhaleJune2026/Whale1_June2026_web.mp4" muted loop playsinline autoplay controls></video>
+    <div class="lightbox-grid">
+      <img src="asset/2026/img/compressed/WhaleJune/WhaleTimeline1_web.jpg" alt="Whale installation, timeline still 1">
+      <img src="asset/2026/img/compressed/WhaleJune/WhaleTimeline2_web.jpg" alt="Whale installation, timeline still 2">
+      <img src="asset/2026/img/compressed/WhaleJune/WhaleTimeline3_web.jpg" alt="Whale installation, timeline still 3">
+      <img src="asset/2026/img/compressed/WhaleJune/WhaleTimeline4_web.jpg" alt="Whale installation, timeline still 4">
+      <img src="asset/2026/img/compressed/WhaleJune/WhaleTimeline5_web.jpg" alt="Whale installation, timeline still 5">
+      <img src="asset/2026/img/compressed/WhaleJune/WhaleTimeline6_web.jpg" alt="Whale installation, timeline still 6">
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>&copy; 2026 Nanae Itoi</span>
+  <span>Design &amp; Development — Portfolio Site</span>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+const PREVIEW_START = 5;
+document.querySelectorAll('.work-item video').forEach(video => {
+  const item = video.closest('.work-item');
+  item.addEventListener('mouseenter', () => {
+    video.currentTime = PREVIEW_START;
+    video.play();
+  });
+  item.addEventListener('mouseleave', () => { video.pause(); video.currentTime = PREVIEW_START; });
+});
+
+document.querySelectorAll('[data-gallery-trigger]').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const gallery = document.getElementById(trigger.dataset.galleryTrigger);
+    if (!gallery) return;
+    gallery.hidden = false;
+    document.body.style.overflow = 'hidden';
+    const video = gallery.querySelector('video');
+    if (video) video.play();
+  });
+});
+
+document.querySelectorAll('.lightbox').forEach(lightbox => {
+  function close(){
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+    const video = lightbox.querySelector('video');
+    if (video) video.pause();
+  }
+  lightbox.querySelector('.lightbox-close').addEventListener('click', close);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !lightbox.hidden) close(); });
+});
+</script>
+</body>
+</html>
