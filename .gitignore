@@ -1,1 +1,18 @@
 .DS_Store
+
+# Raw/original source files — not used by the live site.
+# Only the "compressed" versions (and the 2 Kumamoto images used directly)
+# are tracked in git. These originals stay local only.
+asset/2025/img/BACSep/
+asset/2025/img/bio.gif
+asset/2025/img/holding.jpg
+asset/2025/img/koi-noise.jpg
+asset/2025/img/thecell/
+asset/2025/video/c5bk/
+asset/2025/video/coiffeur+art/
+asset/2025/video/fpoj/
+asset/2025/video/whalebloom.mp4
+asset/2026/img/Whale Project/
+asset/2026/video/AngelFeb2026Clip1.mp4
+asset/2026/video/baccul_corn/
+asset/Bio/bio.jpg
