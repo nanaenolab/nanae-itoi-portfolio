@@ -539,4 +539,14 @@ footer{
   .work-grid{grid-template-columns:1fr;}
   .timeline-row{grid-template-columns:1fr;gap:10px;}
   footer{flex-direction:column;gap:10px;text-align:center;}
+
+  /* Touch devices have no :hover — show captions and the pop-out card
+     effect without waiting for an interaction that will never come. */
+  .work-item{transform:none !important;box-shadow:none !important;}
+  .work-overlay{
+    opacity:1;
+    transform:translateY(0);
+    background:linear-gradient(180deg, rgba(7,7,10,0) 45%, rgba(7,7,10,0.88) 100%);
+  }
+  .work-grid:hover .work-item:not(:hover):not(.placeholder){opacity:1;}
 }
