@@ -1,4 +1,4 @@
-Void<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -55,7 +55,7 @@ Void<!DOCTYPE html>
         <h3>Coiffeur + Art </h3>
       </div>
     </div>
-    <div class="work-item">
+    <div class="work-item" data-gallery-trigger="bloom-gallery">
       <video src="asset/2025/video/timessq/whalebloom.mp4" poster="asset/img/compressed/posters/whalebloom_poster.jpg" muted loop playsinline preload="metadata"></video>
       <div class="work-overlay">
         <div class="tag">Video</div>
@@ -116,6 +116,20 @@ Void<!DOCTYPE html>
   </div>
 </div>
 
+<div class="lightbox" id="bloom-gallery" hidden>
+  <button class="lightbox-close" aria-label="Close gallery">✕</button>
+  <div class="lightbox-inner">
+    <div class="section-label">Video</div>
+    <h2 class="section-title">Whale Bloom — Times Square</h2>
+    <video class="lightbox-video" src="asset/2025/video/timessq/whalebloom.mp4" muted loop playsinline autoplay controls></video>
+    <div class="lightbox-grid">
+      <video src="asset/2025/video/timessq/bloomingWhale.MP4" muted loop playsinline autoplay></video>
+      <video src="asset/2025/video/timessq/bloomOctopus.MP4" muted loop playsinline autoplay></video>
+      <video src="asset/2025/video/timessq/koiBloom.MP4" muted loop playsinline autoplay></video>
+    </div>
+  </div>
+</div>
+
 <footer>
   <span>&copy; 2026 Nanae Itoi</span>
   <span>Design &amp; Development — Portfolio Site</span>
@@ -139,8 +153,7 @@ document.querySelectorAll('[data-gallery-trigger]').forEach(trigger => {
     if (!gallery) return;
     gallery.hidden = false;
     document.body.style.overflow = 'hidden';
-    const video = gallery.querySelector('video');
-    if (video) video.play();
+    gallery.querySelectorAll('video').forEach(video => video.play());
   });
 });
 
@@ -148,8 +161,7 @@ document.querySelectorAll('.lightbox').forEach(lightbox => {
   function close(){
     lightbox.hidden = true;
     document.body.style.overflow = '';
-    const video = lightbox.querySelector('video');
-    if (video) video.pause();
+    lightbox.querySelectorAll('video').forEach(video => video.pause());
   }
   lightbox.querySelector('.lightbox-close').addEventListener('click', close);
   lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });

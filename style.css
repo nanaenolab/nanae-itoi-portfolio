@@ -395,7 +395,8 @@ section{
 #kanami-gallery .lightbox-grid{
   grid-template-columns:repeat(2, 1fr);
 }
-.lightbox-grid img{
+.lightbox-grid img,
+.lightbox-grid video{
   width:100%;
   height:100%;
   aspect-ratio:3/2;
